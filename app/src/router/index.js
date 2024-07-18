@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { HomeView, PostsView, DetailsView, LoginView } from "../views";
-import { useAuthStore } from "../store";
+import { HomeView, PostsView, DetailsView, LoginView, ProfileView, RegisterView } from "../views";
+// import { useAuthStore } from "../store";
 
 const routes = [
   { path: "/", name: "home", component: HomeView },
+  { path: "/profile", name: "profile", component: ProfileView },
   { path: "/login", name: "login", component: LoginView },
+  { path: "/register", name: "register", component: RegisterView },
   { path: "/posts", name: "posts", component: PostsView },
   { path: "/posts/:id", name: "details", component: DetailsView, props: true },
 ];
@@ -12,18 +14,18 @@ const routes = [
 /**Initialize here */
 const router = createRouter({ history: createWebHistory(), routes });
 
-router.beforeEach(async (to) => {
+// router.beforeEach(async (to) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ["/login"];
-  const authRequired = !publicPages.includes(to.path);
-  const auth = useAuthStore();
+  // const publicPages = ["/login"];
+  // const authRequired = !publicPages.includes(to.path);
+  // const auth = useAuthStore();
 
   /**add function to check if user is logged in */
 
-  if (authRequired && !auth.user) {
-    auth.returnUrl = to.fullPath;
-    return "/login";
-  }
-});
+//   if (authRequired && !auth.user) {
+//     auth.returnUrl = to.fullPath;
+//     return "/login";
+//   }
+// });
 
 export default router;
